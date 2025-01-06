@@ -12,6 +12,7 @@
   environment.systemPackages = [
     pkgs.helix
     pkgs.git
+    pkgs.gh
   ];
   users.users.psv = {
     isNormalUser = true;
