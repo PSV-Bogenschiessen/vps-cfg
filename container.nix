@@ -1,12 +1,15 @@
-{ ... }:
+{ lib, ... }:
 let
   base_dir = "/home/psv/docker";
+  coturn_tcp_ports = [3478 5349];
+  coturn_udp_ports = coturn_tcp_ports ++ (lib.lists.range 49160 49200);
 in {
   networking.firewall.allowedTCPPorts = [
     80 # traefik
     443 # traefik
     9443 # portainer
-  ];
+  ] ++ coturn_tcp_ports;
+  networking.firewall.allowedUDPPorts = [] ++ coturn_udp_ports;
 
   virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers = {
