@@ -4,6 +4,7 @@
   networking.hostName = "vmd152122";
   networking.domain = "contaboserver.net";
   services.openssh.enable = true;
+  services.fail2ban.enable = true;
   users.users.root.openssh.authorizedKeys.keys = [''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPGxaPwBikfpS6Kmnhzb1e00P1oD812AYZkz9HtsX4zb thomas@MacBookPro'' ];
   system.stateVersion = "23.11";
 
