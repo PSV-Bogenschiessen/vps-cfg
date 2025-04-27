@@ -23,4 +23,14 @@
     openssh.authorizedKeys.keys = [''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPGxaPwBikfpS6Kmnhzb1e00P1oD812AYZkz9HtsX4zb thomas@MacBookPro'' ];
     extraGroups  = [ "wheel" ];
   };
+
+  # backup
+  systemd.services.backupdocker = {
+    enable = true;
+    startAt = "daily";
+    path = [ "/run/booted-system/sw/bin/" ];
+    serviceConfig = {
+      ExecStart = ''${pkgs.rsync}/bin/rsync -Pav -e "${pkgs.openssh}/bin/ssh -2 -i /home/psv/.ssh/backup_server" /home/psv/docker psv-backup@cloud.franks-im-web.de:'';
+    };
+  };
 }
